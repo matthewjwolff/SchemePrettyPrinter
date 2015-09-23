@@ -30,7 +30,18 @@ namespace Parse
                 // input stream is easier.
                 ch = In.Read();
    
-                // TODO: skip white space and comments
+                //Skip whitespace characters
+                while (ch==' ' | ch=='\t' | ch=='\n' | ch=='\r' | ch=='\f')
+                {
+                    ch = In.Read();
+                }
+                    
+                //If a comment, discard line and consume next character
+                while (ch==';')
+                {
+                    In.ReadLine();
+                    ch = In.Read();
+                }
 
                 if (ch == -1)
                     return null;
