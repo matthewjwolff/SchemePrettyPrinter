@@ -2,6 +2,7 @@
 
 using System;
 using System.IO;
+using System.Text;
 using Tokens;
 
 namespace Parse
@@ -82,8 +83,15 @@ namespace Parse
                 // String constants
                 else if (ch == '"')
                 {
-                    // TODO: scan a string into the buffer variable buf
-                    return new StringToken(new String(buf, 0, 0));
+                    //Known issue: passing a string formatted like "string"with a quote inside". Is that ok?
+                    StringBuilder builder = new StringBuilder();
+                    ch = In.Read();
+                    do
+                    {
+                        builder.Append((char)ch);
+                        ch = In.Read();
+                    } while (ch != '"');
+                    return new StringToken(builder.ToString());
                 }
 
     
