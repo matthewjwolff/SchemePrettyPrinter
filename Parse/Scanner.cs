@@ -90,11 +90,16 @@ namespace Parse
                 // Integer constants
                 else if (ch >= '0' && ch <= '9')
                 {
+                    // Should we use the buffer array of the class?
                     int i = ch - '0';
-                    // TODO: scan the number and convert it to an integer
-
-                    // make sure that the character following the integer
-                    // is not removed from the input stream
+                    char next = (char)In.Peek();
+                    while (next >= '0' && next <= '9')
+                    {
+                        i *= 10;
+                        i += next - '0';
+                        In.Read();
+                        next = (char)In.Peek();
+                    }
                     return new IntToken(i);
                 }
         
