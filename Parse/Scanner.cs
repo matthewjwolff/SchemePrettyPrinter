@@ -14,6 +14,7 @@ namespace Parse
         // maximum length of strings and identifier
         private const int BUFSIZE = 1000;
         private char[] buf = new char[BUFSIZE];
+        private char[] idents = { '!', '$', '%', '&', '*', '+', '-', '.', '/', ':', '<', '=', '>', '?', '@', '^', '_', '~' };
 
         public Scanner(TextReader i) { In = i; }
   
@@ -112,16 +113,21 @@ namespace Parse
                 }
         
                 // Identifiers
-                else if (ch >= 'A' && ch <= 'Z'
-                         // or ch is some other valid first character
-                         // for an identifier
+                else if ((ch >= 'A' && ch <= 'Z') ||
+                    (ch>='a' && ch<= 'z') || 
+                    Array.IndexOf(idents, (char)ch)>-1
                          ) {
-                    // TODO: scan an identifier into the buffer
+                    StringBuilder builder = new StringBuilder();
+                    builder.Append((char)ch);
+                    char next = (char)In.Peek();
+                    while(next != ' ')
+                    {
+                        builder.Append(next);
+                        In.Read();
+                        next = (char)In.Peek();
+                    }
 
-                    // make sure that the character following the integer
-                    // is not removed from the input stream
-
-                    return new IdentToken(new String(buf, 0, 0));
+                    return new IdentToken(builder.ToString());
                 }
     
                 // Illegal character
