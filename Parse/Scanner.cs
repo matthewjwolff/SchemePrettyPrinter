@@ -2,6 +2,7 @@
 
 using System;
 using System.IO;
+using System.Text;
 using Tokens;
 
 namespace Parse
@@ -13,6 +14,7 @@ namespace Parse
         // maximum length of strings and identifier
         private const int BUFSIZE = 1000;
         private char[] buf = new char[BUFSIZE];
+        private char[] idents = { '!', '$', '%', '&', '*', '+', '-', '.', '/', ':', '<', '=', '>', '?', '@', '^', '_', '~' };
 
         public Scanner(TextReader i) { In = i; }
   
@@ -82,33 +84,50 @@ namespace Parse
                 // String constants
                 else if (ch == '"')
                 {
-                    // TODO: scan a string into the buffer variable buf
-                    return new StringToken(new String(buf, 0, 0));
+                    //Known issue: passing a string formatted like "string"with a quote inside". Is that ok?
+                    StringBuilder builder = new StringBuilder();
+                    ch = In.Read();
+                    do
+                    {
+                        builder.Append((char)ch);
+                        ch = In.Read();
+                    } while (ch != '"');
+                    return new StringToken(builder.ToString());
                 }
 
     
                 // Integer constants
                 else if (ch >= '0' && ch <= '9')
                 {
+                    // Should we use the buffer array of the class?
                     int i = ch - '0';
-                    // TODO: scan the number and convert it to an integer
-
-                    // make sure that the character following the integer
-                    // is not removed from the input stream
+                    char next = (char)In.Peek();
+                    while (next >= '0' && next <= '9')
+                    {
+                        i *= 10;
+                        i += next - '0';
+                        In.Read();
+                        next = (char)In.Peek();
+                    }
                     return new IntToken(i);
                 }
         
                 // Identifiers
-                else if (ch >= 'A' && ch <= 'Z'
-                         // or ch is some other valid first character
-                         // for an identifier
+                else if ((ch >= 'A' && ch <= 'Z') ||
+                    (ch>='a' && ch<= 'z') || 
+                    Array.IndexOf(idents, (char)ch)>-1
                          ) {
-                    // TODO: scan an identifier into the buffer
+                    StringBuilder builder = new StringBuilder();
+                    builder.Append((char)ch);
+                    char next = (char)In.Peek();
+                    while(next != ' ')
+                    {
+                        builder.Append(next);
+                        In.Read();
+                        next = (char)In.Peek();
+                    }
 
-                    // make sure that the character following the integer
-                    // is not removed from the input stream
-
-                    return new IdentToken(new String(buf, 0, 0));
+                    return new IdentToken(builder.ToString());
                 }
     
                 // Illegal character
