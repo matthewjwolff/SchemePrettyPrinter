@@ -6,7 +6,16 @@ namespace Tree
 {
     public class Nil : Node
     {
-        public Nil() { }
+        private static Nil nil;
+
+        private Nil() { }
+
+        public static Nil getNil()
+        {
+            if (nil == null)
+                nil = new Nil();
+            return nil;
+        }
   
         public override void print(int n)
         {
