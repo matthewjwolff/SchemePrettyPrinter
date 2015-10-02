@@ -47,7 +47,18 @@ namespace Parse
   
         public Node parseExp()
         {
-            // TODO: write code for parsing an exp
+            Token tok = scanner.getNextToken();
+            if (tok.getType() == TokenType.INT)
+                return new IntLit(tok.getIntVal());
+            else if (tok.getType() == TokenType.STRING)
+                return new StringLit(tok.getStringVal());
+            else if (tok.getType() == TokenType.TRUE)
+                return BoolLit.getTrue();
+            else if (tok.getType() == TokenType.FALSE)
+                return BoolLit.getFalse();
+            //single quote
+            //open paren
+            //identifier
             return null;
         }
   
