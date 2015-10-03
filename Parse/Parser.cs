@@ -36,6 +36,7 @@
 using System;
 using Tokens;
 using Tree;
+using System.Collections.Generic;
 
 namespace Parse
 {
@@ -44,10 +45,14 @@ namespace Parse
         private Scanner scanner;
 
         public Parser(Scanner s) { scanner = s; }
-  
+
         public Node parseExp()
         {
-            Token tok = scanner.getNextToken();
+            return parseExp(scanner.getNextToken());
+        }
+
+        private Node parseExp(Token tok)
+        {
             if (tok.getType() == TokenType.INT)
                 return new IntLit(tok.getIntVal());
             else if (tok.getType() == TokenType.STRING)
@@ -56,16 +61,30 @@ namespace Parse
                 return BoolLit.getTrue();
             else if (tok.getType() == TokenType.FALSE)
                 return BoolLit.getFalse();
+            else if (tok.getType() == TokenType.IDENT)
+                return new Ident(tok.getName());
+            else if (tok.getType() == TokenType.LPAREN)
+                return parseRest();
             //single quote
-            //open paren
-            //identifier
             return null;
         }
   
         protected Node parseRest()
         {
-            // TODO: write code for parsing a rest
-            return null;
+            Stack<Node> st = new Stack<Node>();
+            Token next;
+            while((next = scanner.getNextToken()).getType()!=TokenType.RPAREN)
+                st.Push(parseExp(next));
+            st.Push(Nil.getNil());
+            while(true)
+            {
+                Console.WriteLine(st);
+                Node cdr = st.Pop();
+                Node car = st.Pop();
+                st.Push(new Cons(car, cdr));
+                if (st.Count == 1)
+                    return st.Pop();
+            }
         }
 
         // TODO: Add any additional methods you might need.

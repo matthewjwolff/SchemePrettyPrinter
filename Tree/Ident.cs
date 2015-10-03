@@ -21,6 +21,11 @@ namespace Tree
 
             Console.WriteLine(name);
         }
+
+        public string getName()
+        {
+            return name;
+        }
     }
 }
 
