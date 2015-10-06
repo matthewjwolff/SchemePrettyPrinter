@@ -72,9 +72,12 @@ namespace Parse
         protected Node parseRest()
         {
             Stack<Node> st = new Stack<Node>();
-            Token next;
-            while((next = scanner.getNextToken()).getType()!=TokenType.RPAREN)
+            Token next = scanner.getNextToken();
+            while(next.getType() != TokenType.RPAREN)
+            {
                 st.Push(parseExp(next));
+                next = scanner.getNextToken();
+            }
             st.Push(Nil.getNil());
             while(true)
             {
