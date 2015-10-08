@@ -6,14 +6,22 @@ namespace Tree
 {
     public class Quote : Special
     {
-        // TODO: Add any fields needed.
-  
-        // TODO: Add an appropriate constructor.
-	public Quote() { }
+        private Cons list;
+
+        public Quote(Cons list)
+        {
+            this.list = list;
+        }
 
         public override void print(Node t, int n, bool p)
         {
-            // TODO: Implement this function.
+            Console.Write("'");
+            ((Cons)list.getCar()).print(n, false);
+        }
+
+        public Cons getQuote()
+        {
+            return list;
         }
     }
 }

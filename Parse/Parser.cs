@@ -61,6 +61,8 @@ namespace Parse
                 return BoolLit.getTrue();
             else if (tok.getType() == TokenType.FALSE)
                 return BoolLit.getFalse();
+            else if (tok.getType() == TokenType.QUOTE)
+                return new Cons(new Ident("'"), new Cons(parseExp(), null));
             else if (tok.getType() == TokenType.IDENT)
                 return new Ident(tok.getName());
             else if (tok.getType() == TokenType.LPAREN)
