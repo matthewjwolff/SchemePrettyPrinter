@@ -41,5 +41,10 @@ namespace Tree
             else
                 Console.WriteLine("#f");
         }
+
+        public override bool isBool()
+        {
+            return true;
+        }
     }
 }

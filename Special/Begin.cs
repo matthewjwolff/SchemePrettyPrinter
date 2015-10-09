@@ -14,18 +14,13 @@ namespace Tree
             for (int i = 0; i < n; i++)
                 Console.Write(" ");
 
-            Console.WriteLine("(begin");
-
-            //Check after begin to see if its a Cons. if a Cons, indent 4 times
-            if (t.getCdr().isPair())
+            if(!p)
             {
-                t.getCdr().print(n + 4, p);
+                Console.Write("(");
             }
-                for (int i = 0; i < n; i++)
-                   Console.Write(" ");
-
-            Console.Write(")");
-
+            t.getCar().print(n);
+            Console.WriteLine();
+            t.getCdr().print(n + 4, true);
         }
     }
 }

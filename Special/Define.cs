@@ -14,13 +14,12 @@ namespace Tree
             for (int i = 0; i < n; i++)
                 Console.Write(" ");
 
-            Console.WriteLine("(define");
-            if (t.getCdr() != null)
+            if(!p)
             {
-                t.getCdr().getCar().print(n, false);
+                Console.Write("(");
             }
-            else
-                Console.Write(")");
+            t.getCar().print(n);
+            t.getCdr().print(n, true);
         }
     }
 }

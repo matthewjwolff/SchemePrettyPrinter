@@ -13,7 +13,16 @@ namespace Tree
 
         public override void print(Node t, int n, bool p)
         {
-            // TODO: Implement this function.
+            if(!p)
+            {
+                Console.Write("(");
+            } else
+            {
+                Console.Write(" ");
+            }
+            Node car = t.getCar();
+            car.print(n, !car.isPair());
+            t.getCdr().print(n, true);
         }
     }
 }

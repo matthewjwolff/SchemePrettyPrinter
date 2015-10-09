@@ -83,7 +83,6 @@ namespace Parse
             st.Push(Nil.getNil());
             while(true)
             {
-                Console.WriteLine(st);
                 Node cdr = st.Pop();
                 Node car = st.Pop();
                 st.Push(new Cons(car, cdr));
