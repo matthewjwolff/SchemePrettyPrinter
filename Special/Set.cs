@@ -13,7 +13,8 @@ namespace Tree
 	
         public override void print(Node t, int n, bool p)
         {
-            for(int i =0; i < n; i++)
+            //CursorLeft gets the cursor's position in the console. Don't indent if you don't have to.
+            for (int i = Console.CursorLeft; i < n; i++)
                 Console.Write(" ");
             
 
