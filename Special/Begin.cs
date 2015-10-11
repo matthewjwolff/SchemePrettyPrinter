@@ -27,15 +27,11 @@ namespace Tree
                 while ((rest= rest.getCdr()) != Nil.getNil())
                 {
                     rest.getCar().print(n + 4, false);
-                    
                 }
                 Console.WriteLine();
                 Console.Write(")");
             }
-         else //Just print normally
-            {
-                t.getCdr().print(n, true);
-             }
+         else  t.getCdr().print(n, true);
        }
     }
 }

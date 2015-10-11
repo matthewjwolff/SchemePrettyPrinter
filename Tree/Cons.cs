@@ -38,6 +38,9 @@ namespace Tree
                     case "cond":
                         form = new Cond();
                         break;
+                    case "let":
+                        form = new Let();
+                        break;
                     case "define":
                         form = new Define();
                         break;
