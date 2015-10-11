@@ -27,7 +27,7 @@ namespace Tree
                 blocks = blocks.getCdr();
             }
             blocks.print(n,true);
-            Console.WriteLine();
+            //Console.WriteLine();
         }
     }
 }

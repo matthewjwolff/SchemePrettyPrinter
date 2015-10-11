@@ -20,15 +20,30 @@ namespace Tree
             }
             //Print "define"
             t.getCar().print(n);
-            Console.Write(" ");
             //Get rest of list
             Node rest = t.getCdr();
             //If this is a function definition, line break
             if(rest.getCar().isPair())
             {
+                //Print the defined term
+                Console.Write(" ");
                 rest.getCar().print(n,false);
                 Console.WriteLine();
-                rest.getCdr().print(n+4, false);
+                //Print the rest
+                //Print an open paren if we need one
+                if(rest.getCdr().getCar().isPair())
+                {
+                    for (int i = Console.CursorLeft; i < n + 4; i++)
+                        Console.Write(" ");
+                    Console.Write("(");
+                }
+                //Now print every term with a new line after
+                while((rest = rest.getCdr())!=Nil.getNil())
+                {
+                    rest.getCar().print(n + 4, true);
+                    Console.WriteLine();
+                }
+                Console.Write(")");
             } else //Just print normally
             {
                 t.getCdr().print(n, true);
