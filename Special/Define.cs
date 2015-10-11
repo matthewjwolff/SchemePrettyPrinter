@@ -18,8 +18,21 @@ namespace Tree
             {
                 Console.Write("(");
             }
+            //Print "define"
             t.getCar().print(n);
-            t.getCdr().print(n, true);
+            Console.Write(" ");
+            //Get rest of list
+            Node rest = t.getCdr();
+            //If this is a function definition, line break
+            if(rest.getCar().isPair())
+            {
+                rest.getCar().print(n,false);
+                Console.WriteLine();
+                rest.getCdr().print(n+4, false);
+            } else //Just print normally
+            {
+                t.getCdr().print(n, true);
+            }
         }
     }
 }

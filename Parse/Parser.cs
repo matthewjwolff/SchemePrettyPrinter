@@ -67,7 +67,7 @@ namespace Parse
                 return new Ident(tok.getName());
             else if (tok.getType() == TokenType.LPAREN)
                 return parseRest();
-            //single quote
+            //dot
             return null;
         }
   

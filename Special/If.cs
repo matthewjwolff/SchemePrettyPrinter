@@ -14,29 +14,17 @@ namespace Tree
             for (int i = 0; i < n; i++)
                 Console.Write(" ");
             //Write IF from the start.  Once the expressions passes the else cause, Close with ")"
-            Console.Write("(if");
+            Console.Write("(if ");
 
-            //Check cond after if is a Con
-            if (t.getCdr().getCar().isPair())
-            {
-                Node iff = t.getCdr().getCar();
-                iff.print(0, true);
-            }
-            else Console.WriteLine();
+            t.getCdr().getCar().print(0, false);
+            Console.WriteLine();
 
-            //Define the then statement
-            Node thenn = t.getCdr().getCdr().getCar();
-            if(!thenn.isNull())
+            Node blocks = t.getCdr().getCdr();
+            while(!blocks.isNull())
             {
-                thenn.print(n + 4, true);
-            }
-            else Console.WriteLine();
-
-            //Goes down the scheme until gets to the else statement
-            Node elsee = t.getCdr().getCdr().getCdr().getCar();
-            while(!elsee.isNull())
-            {
-                elsee.print(n + 4, true);
+                blocks.getCar().print(n);
+                Console.WriteLine();
+                blocks = blocks.getCdr();
             }
   
             Console.WriteLine(")");          
