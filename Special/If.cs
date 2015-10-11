@@ -20,7 +20,7 @@ namespace Tree
             if (t.getCdr().getCar().isPair())
             {
                 Node iff = t.getCdr().getCar();
-                iff.print(0, p);
+                iff.print(0, true);
             }
             else Console.WriteLine();
 
@@ -28,7 +28,7 @@ namespace Tree
             Node thenn = t.getCdr().getCdr().getCar();
             if(!thenn.isNull())
             {
-                thenn.print(n + 2, p);
+                thenn.print(n + 4, true);
             }
             else Console.WriteLine();
 
@@ -36,7 +36,7 @@ namespace Tree
             Node elsee = t.getCdr().getCdr().getCdr().getCar();
             while(!elsee.isNull())
             {
-                elsee.print(n + 2, p);
+                elsee.print(n + 4, true);
             }
   
             Console.WriteLine(")");          

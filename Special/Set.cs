@@ -13,14 +13,24 @@ namespace Tree
 	
         public override void print(Node t, int n, bool p)
         {
-            for (int i = 0; i < n; i++)
+            for(int i =0; i < n; i++)
                 Console.Write(" ");
-            if(!p)
+            
+
+            if (!p)
             {
                 Console.Write("(");
             }
+
             t.getCar().print(n);
-            t.getCdr().print(n, true);
+
+            if (t.getCar().isPair())
+            {
+                t.getCar().print(n+4, true);
+            }
+            else t.getCdr().print(n, true);
+
+            Console.WriteLine();
         }
     }
 }
