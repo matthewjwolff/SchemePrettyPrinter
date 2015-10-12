@@ -26,11 +26,12 @@ namespace Tree
             if (rest.isPair())
             {
                 rest.getCar().print(n + 4, false);
+                Console.WriteLine();
                 while ((rest = rest.getCdr()) != Nil.getNil())
                 {
                     rest.getCar().print(n + 4, false);
+                    Console.WriteLine();
                 }
-                Console.WriteLine();
                 Console.Write(")");
             }
             else t.getCdr().print(n, true);
