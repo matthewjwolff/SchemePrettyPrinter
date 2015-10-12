@@ -36,7 +36,7 @@
 using System;
 using Tokens;
 using Tree;
-using System.Collections.Generic;
+using System.Collections;
 
 namespace Parse
 {
@@ -72,7 +72,7 @@ namespace Parse
   
         protected Node parseRest()
         {
-            Stack<Node> st = new Stack<Node>();
+            Stack st = new Stack();
             Token next = scanner.getNextToken();
             while((next.getType() != TokenType.RPAREN) && (next.getType() != TokenType.DOT))
             {
@@ -94,12 +94,12 @@ namespace Parse
             }
             while(true)
             {
-                Node cdr = st.Pop();
-                Node car = st.Pop();
+                Node cdr = (Node)st.Pop();
+                Node car = (Node)st.Pop();
                 st.Push(new Cons(car, cdr));
                 if (st.Count == 1)
                 {
-                    return st.Pop();
+                    return (Node)st.Pop();
             }
             }
         }
