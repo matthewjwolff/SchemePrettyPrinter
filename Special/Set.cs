@@ -31,7 +31,7 @@ namespace Tree
             }
             else t.getCdr().print(n, true);
 
-            Console.WriteLine();
+            //Console.WriteLine();
         }
     }
 }
