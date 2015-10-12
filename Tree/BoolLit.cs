@@ -37,9 +37,9 @@ namespace Tree
                 Console.Write(" ");
 
             if (boolVal)
-                Console.WriteLine("#t");
+                Console.Write("#t");
             else
-                Console.WriteLine("#f");
+                Console.Write("#f");
         }
 
         public override bool isBool()

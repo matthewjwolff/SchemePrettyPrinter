@@ -32,7 +32,7 @@ namespace Tree
                     rest.getCar().print(n + 4, false);
                     Console.WriteLine();
                 }
-                Console.WriteLine();
+                Nil.getNil().print(n, true);
             }
             else t.getCdr().print(n, true);
         }
