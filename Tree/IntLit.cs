@@ -15,11 +15,7 @@ namespace Tree
 
         public override void print(int n)
         {
-	    // There got to be a more efficient way to print n spaces.
-	    for (int i = Console.CursorLeft; i < n; i++)
-                Console.Write(" ");
-
-            Console.Write(intVal);
+                Console.Write(intVal);
         }
 
         public override bool isNumber()

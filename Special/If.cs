@@ -11,7 +11,7 @@ namespace Tree
 
         public override void print(Node t, int n, bool p)
         {
-            for (int i = Console.CursorLeft; i < n; i++)
+            for (int i = 0; i < n; i++)
                 Console.Write(" ");
             //Write IF from the start.  Once the expressions passes the else cause, Close with ")"
             Console.Write("if ");
