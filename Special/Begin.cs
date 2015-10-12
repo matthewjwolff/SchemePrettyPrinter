@@ -23,12 +23,13 @@ namespace Tree
             Node rest = t.getCdr();
             if (rest.isPair())
             {
-                rest.getCar().print(n + 4, false);            
+                rest.getCar().print(n + 4, false);
+                Console.WriteLine();         
                 while ((rest= rest.getCdr()) != Nil.getNil())
                 {
                     rest.getCar().print(n + 4, false);
+                    Console.WriteLine();
                 }
-                Console.WriteLine();
                 Console.Write(")");
             }
          else  t.getCdr().print(n, true);
