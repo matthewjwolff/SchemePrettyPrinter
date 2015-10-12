@@ -15,7 +15,7 @@ namespace Tree
 
         public override void print(int n)
         {
-                Console.Write(intVal);
+            Console.Write(intVal);
         }
 
         public override bool isNumber()

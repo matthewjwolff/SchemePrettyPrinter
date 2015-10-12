@@ -31,12 +31,7 @@ namespace Tree
                 Console.WriteLine();
                 //Print the rest
                 //Print an open paren if we need one
-                if(rest.getCdr().getCar().isPair())
-                {
-                    for (int i = 0; i < n + 4; i++)
-                        Console.Write(" ");
-                    Console.Write("(");
-                }
+
                 //Now print every term with a new line after
                 while((rest = rest.getCdr())!=Nil.getNil())
                 {

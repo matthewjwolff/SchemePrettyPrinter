@@ -13,21 +13,34 @@ namespace Tree
         {
             for (int i = 0; i < n; i++)
                 Console.Write(" ");
-            //Write IF from the start.  Once the expressions passes the else cause, Close with ")"
-            Console.Write("if ");
-
-            t.getCdr().getCar().print(0, false);
-            Console.WriteLine();
+            
+            if(!p)
+            {
+                Console.Write("(");
+            }
+            // print "if"
+            t.getCar().print(n);
+            Console.Write(" ");
 
             Node blocks = t.getCdr().getCdr();
-            while(!blocks.isNull())
-            {
-                blocks.getCar().print(n+4);
+            if (t.getCdr().isPair() & blocks.isPair() & blocks.getCdr().isPair())
+            { 
+                t.getCdr().getCar().print(n+1, false);
                 Console.WriteLine();
-                blocks = blocks.getCdr();
+         //       for (int i = 0; i < n; i++)
+          //          Console.Write(" ");
+                blocks.getCar().print(n + 4, false);
+                if (blocks.getCdr().isPair())
+                {
+                    Console.WriteLine();
+                    blocks.getCdr().getCar().print(n+4, false);
+                }
+                Console.WriteLine();
             }
-            blocks.print(n,true);
-            //Console.WriteLine();
+            else t.getCdr().print(n, true);
+            for (int i = 0; i < n; i++)
+                Console.Write(" ");
+            Console.Write(")");
         }
     }
 }
