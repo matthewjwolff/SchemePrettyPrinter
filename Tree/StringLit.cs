@@ -17,7 +17,7 @@ namespace Tree
         {
 	    // There got to be a more efficient way to print n spaces.
 
-                Console.Write(stringVal);
+                Console.Write("\""+stringVal+"\"");
         }
 
         public override bool isString()

@@ -11,8 +11,8 @@ namespace Tree
 
         public override void print(Node t, int n, bool p)
         {
-            for (int i = 0; i < n; i++)
-                Console.Write(" ");
+            //for (int i = 0; i < n; i++)
+                //Console.Write(" ");
             //Write IF from the start.  Once the expressions passes the else cause, Close with ")"
             Console.Write("if ");
 
@@ -22,10 +22,14 @@ namespace Tree
             Node blocks = t.getCdr().getCdr();
             while(!blocks.isNull())
             {
-                blocks.getCar().print(n+4);
+                for (int i = 0; i < n+4; i++)
+                    Console.Write(" ");
+                blocks.getCar().print(0);
                 Console.WriteLine();
                 blocks = blocks.getCdr();
             }
+            for (int i = 0; i < n; i++)
+                Console.Write(" ");
             blocks.print(n,true);
             //Console.WriteLine();
         }

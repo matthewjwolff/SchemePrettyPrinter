@@ -53,6 +53,8 @@ namespace Parse
 
         private Node parseExp(Token tok)
         {
+            if (tok == null)
+                return null;
             if (tok.getType() == TokenType.INT)
                 return new IntLit(tok.getIntVal());
             else if (tok.getType() == TokenType.STRING)
