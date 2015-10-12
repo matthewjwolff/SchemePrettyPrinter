@@ -67,7 +67,6 @@ namespace Parse
                 return new Ident(tok.getName());
             else if (tok.getType() == TokenType.LPAREN)
                 return parseRest();
-            //dot
             return null;
         }
   
@@ -75,7 +74,7 @@ namespace Parse
         {
             Stack<Node> st = new Stack<Node>();
             Token next = scanner.getNextToken();
-            while(next.getType() != TokenType.RPAREN)
+            while((next.getType() != TokenType.RPAREN) && (next.getType() != TokenType.DOT))
             {
                 st.Push(parseExp(next));
                 next = scanner.getNextToken();
@@ -83,14 +82,23 @@ namespace Parse
             if (st.Count == 0)
                 return Nil.getNil();
             st.Push(Nil.getNil());
+            Node retval;
             while(true)
             {
                 Node cdr = st.Pop();
                 Node car = st.Pop();
                 st.Push(new Cons(car, cdr));
                 if (st.Count == 1)
-                    return st.Pop();
+                {
+                    retval = st.Pop();
+                    break;
+                }
             }
+            if (next.getType() == TokenType.DOT)
+            {
+                retval.setCdr(parseExp());
+            }
+            return retval;
         }
 
         // TODO: Add any additional methods you might need.
