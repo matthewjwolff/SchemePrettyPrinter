@@ -82,6 +82,9 @@ namespace Parse
             if (next.getType() == TokenType.DOT)
             {
                 st.Push(parseExp());
+                //We need to eat the closing paren of the outer list. The next token should be one of those.
+                if (scanner.getNextToken().getType() != TokenType.RPAREN)
+                    throw new Exception();
             }
             else
             {
