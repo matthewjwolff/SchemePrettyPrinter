@@ -12,8 +12,29 @@ namespace Tree
 	public Cond() { }
 
         public override void print(Node t, int n, bool p)
-        { 
-            // TODO: Implement this function.
+        {
+            for (int i = Console.CursorLeft; i < n; i++)
+                Console.Write(" ");
+            if (!p)
+            {
+                Console.Write("(");
+            }
+            //print "cond"
+            t.getCar().print(n);
+            Console.WriteLine();
+            Node rest = t.getCdr();
+            if (rest.isPair())
+            {
+                rest.getCar().print(n + 4, false);
+                Console.WriteLine();
+                while ((rest = rest.getCdr()) != Nil.getNil())
+                {
+                    rest.getCar().print(n + 4, false);
+                    Console.WriteLine();
+                }
+                Nil.getNil().print(n, true);
+            }
+            else t.getCdr().print(n, true);
         }
     }
 }

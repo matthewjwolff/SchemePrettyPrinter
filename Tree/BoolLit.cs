@@ -7,22 +7,44 @@ namespace Tree
     public class BoolLit : Node
     {
         private bool boolVal;
+
+        private static BoolLit trueLit;
+        private static BoolLit falseLit;
   
-        public BoolLit(bool b)
+        private BoolLit(bool b)
         {
             boolVal = b;
+        }
+
+        public static BoolLit getTrue()
+        {
+            if(trueLit == null)
+                trueLit = new BoolLit(true);
+            return trueLit;
+        }
+
+        public static BoolLit getFalse()
+        {
+            if (falseLit == null)
+                falseLit = new BoolLit(false);
+            return falseLit;
         }
   
         public override void print(int n)
         {
 	    // There got to be a more efficient way to print n spaces.
-	    for (int i = 0; i < n; i++)
+	    for (int i = Console.CursorLeft; i < n; i++)
                 Console.Write(" ");
 
             if (boolVal)
-                Console.WriteLine("#t");
+                Console.Write("#t");
             else
-                Console.WriteLine("#f");
+                Console.Write("#f");
+        }
+
+        public override bool isBool()
+        {
+            return true;
         }
     }
 }

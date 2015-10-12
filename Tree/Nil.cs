@@ -6,7 +6,16 @@ namespace Tree
 {
     public class Nil : Node
     {
-        public Nil() { }
+        private static Nil nil;
+
+        private Nil() { }
+
+        public static Nil getNil()
+        {
+            if (nil == null)
+                nil = new Nil();
+            return nil;
+        }
   
         public override void print(int n)
         {
@@ -15,13 +24,18 @@ namespace Tree
 
         public override void print(int n, bool p) {
 	    // There got to be a more efficient way to print n spaces.
-	    for (int i = 0; i < n; i++)
+	        for (int i = Console.CursorLeft; i < n; i++)
                 Console.Write(" ");
 
             if (p)
-                Console.WriteLine(")");
+                Console.Write(")");
             else
-                Console.WriteLine("()");
+                Console.Write("()");
+        }
+
+        public override bool isNull()
+        {
+            return true;
         }
     }
 }

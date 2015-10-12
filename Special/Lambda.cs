@@ -6,15 +6,35 @@ namespace Tree
 {
     public class Lambda : Special
     {
-        // TODO: Add any fields needed.
 
-        // TODO: Add an appropriate constructor.
 	public Lambda() { }
 
         public override void print(Node t, int n, bool p)
         {
-            // TODO: Implement this function.
-  	}
+            for (int i = Console.CursorLeft; i < n; i++)
+                Console.Write(" ");
+
+            if (!p)
+                Console.Write("(");
+            //Print "lambda"
+            t.getCar().print(n);
+            Console.Write(" ");
+
+            Node second = t.getCdr().getCar();
+            if (second.isPair())
+            {
+                second.print(n, false);
+            }
+            Console.WriteLine();
+            Node term = t.getCdr().getCdr();
+            while(!term.isNull())
+            {
+                term.getCar().print(n + 4);
+                term = term.getCdr();
+                Console.WriteLine();
+            }
+            Nil.getNil().print(n,true);
+        }
     }
 }
 

@@ -6,14 +6,28 @@ namespace Tree
 {
     public class If : Special
     {
-        // TODO: Add any fields needed.
- 
-        // TODO: Add an appropriate constructor.
+
 	public If() { }
 
         public override void print(Node t, int n, bool p)
         {
-            // TODO: Implement this function.
+            for (int i = Console.CursorLeft; i < n; i++)
+                Console.Write(" ");
+            //Write IF from the start.  Once the expressions passes the else cause, Close with ")"
+            Console.Write("if ");
+
+            t.getCdr().getCar().print(0, false);
+            Console.WriteLine();
+
+            Node blocks = t.getCdr().getCdr();
+            while(!blocks.isNull())
+            {
+                blocks.getCar().print(n+4);
+                Console.WriteLine();
+                blocks = blocks.getCdr();
+            }
+            blocks.print(n,true);
+            //Console.WriteLine();
         }
     }
 }

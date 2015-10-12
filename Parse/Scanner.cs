@@ -120,7 +120,7 @@ namespace Parse
                     StringBuilder builder = new StringBuilder();
                     builder.Append((char)ch);
                     char next = (char)In.Peek();
-                    while(next != ' ')
+                    while((next != ' ')&&(next!=')'))
                     {
                         builder.Append(next);
                         In.Read();

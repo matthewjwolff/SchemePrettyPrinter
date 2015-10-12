@@ -1,6 +1,7 @@
 // Cons -- Parse tree node class for representing a Cons node
 
 using System;
+using Tokens;
 
 namespace Tree
 {
@@ -27,8 +28,40 @@ namespace Tree
         // parsing up to the interpreter.
         void parseList()
         {
-            // TODO: implement this function and any helper functions
-            // you might need.
+            if (car.isSymbol())
+            {
+                switch (((Ident)car).getName())
+                {
+                    case "begin":
+                        form = new Begin();
+                        break;
+                    case "cond":
+                        form = new Cond();
+                        break;
+                    case "let":
+                        form = new Let();
+                        break;
+                    case "define":
+                        form = new Define();
+                        break;
+                    case "if":
+                        form = new If();
+                        break;
+                    case "lambda":
+                        form = new Lambda();
+                        break;
+                    case "'":
+                        form = new Quote();
+                        break;
+                    case "set!":
+                        form = new Set();
+                        break;
+                    default:
+                        form = new Regular();
+                        break;
+                }
+            }
+            else form = new Regular();
         }
  
         public override void print(int n)
@@ -39,6 +72,32 @@ namespace Tree
         public override void print(int n, bool p)
         {
             form.print(this, n, p);
+        }
+
+        public override bool isPair()
+        {
+            return true;
+        }
+
+        public override Node getCar()
+        {
+            return car;
+        }
+
+        public override Node getCdr()
+        {
+            return cdr;
+        }
+
+        public override void setCar(Node a)
+        {
+            car = a;
+            parseList();
+        }
+
+        public override void setCdr(Node d)
+        {
+            cdr = d;
         }
     }
 }

@@ -36,6 +36,7 @@
 using System;
 using Tokens;
 using Tree;
+using System.Collections.Generic;
 
 namespace Parse
 {
@@ -44,17 +45,52 @@ namespace Parse
         private Scanner scanner;
 
         public Parser(Scanner s) { scanner = s; }
-  
+
         public Node parseExp()
         {
-            // TODO: write code for parsing an exp
+            return parseExp(scanner.getNextToken());
+        }
+
+        private Node parseExp(Token tok)
+        {
+            if (tok.getType() == TokenType.INT)
+                return new IntLit(tok.getIntVal());
+            else if (tok.getType() == TokenType.STRING)
+                return new StringLit(tok.getStringVal());
+            else if (tok.getType() == TokenType.TRUE)
+                return BoolLit.getTrue();
+            else if (tok.getType() == TokenType.FALSE)
+                return BoolLit.getFalse();
+            else if (tok.getType() == TokenType.QUOTE)
+                return new Cons(new Ident("'"), parseExp());
+            else if (tok.getType() == TokenType.IDENT)
+                return new Ident(tok.getName());
+            else if (tok.getType() == TokenType.LPAREN)
+                return parseRest();
+            //dot
             return null;
         }
   
         protected Node parseRest()
         {
-            // TODO: write code for parsing a rest
-            return null;
+            Stack<Node> st = new Stack<Node>();
+            Token next = scanner.getNextToken();
+            while(next.getType() != TokenType.RPAREN)
+            {
+                st.Push(parseExp(next));
+                next = scanner.getNextToken();
+            }
+            if (st.Count == 0)
+                return Nil.getNil();
+            st.Push(Nil.getNil());
+            while(true)
+            {
+                Node cdr = st.Pop();
+                Node car = st.Pop();
+                st.Push(new Cons(car, cdr));
+                if (st.Count == 1)
+                    return st.Pop();
+            }
         }
 
         // TODO: Add any additional methods you might need.

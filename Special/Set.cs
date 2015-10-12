@@ -13,7 +13,25 @@ namespace Tree
 	
         public override void print(Node t, int n, bool p)
         {
-            // TODO: Implement this function.
+            //CursorLeft gets the cursor's position in the console. Don't indent if you don't have to.
+            for (int i = Console.CursorLeft; i < n; i++)
+                Console.Write(" ");
+            
+
+            if (!p)
+            {
+                Console.Write("(");
+            }
+
+            t.getCar().print(n);
+
+            if (t.getCar().isPair())
+            {
+                t.getCar().print(n+4, true);
+            }
+            else t.getCdr().print(n, true);
+
+            //Console.WriteLine();
         }
     }
 }
