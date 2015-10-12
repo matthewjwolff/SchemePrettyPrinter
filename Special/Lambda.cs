@@ -11,33 +11,29 @@ namespace Tree
 
         public override void print(Node t, int n, bool p)
         {
+            for (int i = Console.CursorLeft; i < n; i++)
+                Console.Write(" ");
 
             if (!p)
-            {
                 Console.Write("(");
-            }
-            else
-            {
-                Console.Write(" ");
-            }
-            Console.Write("lambda");
-
-            for (int i = 0; i < n; i++)
-                Console.Write(" ");
+            //Print "lambda"
+            t.getCar().print(n);
+            Console.Write(" ");
 
             Node second = t.getCdr().getCar();
             if (second.isPair())
             {
-                second.print(n, true);
+                second.print(n, false);
             }
-            else Console.WriteLine();
-
-            Node third = t.getCdr().getCdr().getCar();
-            if (second.isPair())
+            Console.WriteLine();
+            Node term = t.getCdr().getCdr();
+            while(!term.isNull())
             {
-                second.print(n+2, true);
+                term.getCar().print(n + 4);
+                term = term.getCdr();
+                Console.WriteLine();
             }
-            else Console.Write(" ");
+            Nil.getNil().print(n,true);
         }
     }
 }

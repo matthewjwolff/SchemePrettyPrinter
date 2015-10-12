@@ -53,8 +53,8 @@ public class SPP
         while (root != null) 
         {
             root.print(0);
-            root = parser.parseExp();
             Console.WriteLine();
+            root = parser.parseExp();
         }
 
         return 0;
