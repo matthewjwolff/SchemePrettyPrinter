@@ -67,7 +67,6 @@ namespace Parse
                 return new Ident(tok.getName());
             else if (tok.getType() == TokenType.LPAREN)
                 return parseRest();
-            //dot
             return null;
         }
   
@@ -75,21 +74,33 @@ namespace Parse
         {
             Stack<Node> st = new Stack<Node>();
             Token next = scanner.getNextToken();
-            while(next.getType() != TokenType.RPAREN)
+            while((next.getType() != TokenType.RPAREN) && (next.getType() != TokenType.DOT))
             {
                 st.Push(parseExp(next));
                 next = scanner.getNextToken();
             }
-            if (st.Count == 0)
-                return Nil.getNil();
-            st.Push(Nil.getNil());
+            if (next.getType() == TokenType.DOT)
+            {
+                st.Push(parseExp());
+                //We need to eat the closing paren of the outer list. The next token should be one of those.
+                if (scanner.getNextToken().getType() != TokenType.RPAREN)
+                    throw new Exception();
+            }
+            else
+            {
+                if (st.Count == 0)
+                    return Nil.getNil();
+                st.Push(Nil.getNil());
+            }
             while(true)
             {
                 Node cdr = st.Pop();
                 Node car = st.Pop();
                 st.Push(new Cons(car, cdr));
                 if (st.Count == 1)
+                {
                     return st.Pop();
+            }
             }
         }
 
