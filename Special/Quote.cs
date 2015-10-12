@@ -6,22 +6,25 @@ namespace Tree
 {
     public class Quote : Special
     {
-        private Cons list;
-
-        public Quote(Cons list)
-        {
-            this.list = list;
-        }
+        public Quote() {}
 
         public override void print(Node t, int n, bool p)
         {
-            Console.Write("'");
-            ((Cons)list.getCar()).print(n, false);
-        }
-
-        public Cons getQuote()
-        {
-            return list;
+            for(int i=Console.CursorLeft; i<n; i++)
+            {
+                Console.Write(" ");
+            }
+            t.getCar().print(n);
+            Node list = t.getCdr();
+            Console.Write("(");
+            while(!list.isNull())
+            {
+                list.getCar().print(n);
+                list = list.getCdr();
+                if (!list.isNull())
+                    Console.Write(" ");
+            }
+            Nil.getNil().print(n, true);
         }
     }
 }

@@ -51,7 +51,7 @@ namespace Tree
                         form = new Lambda();
                         break;
                     case "'":
-                        form = new Quote((Cons)cdr);
+                        form = new Quote();
                         break;
                     case "set!":
                         form = new Set();

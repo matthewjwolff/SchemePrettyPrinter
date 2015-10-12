@@ -62,7 +62,7 @@ namespace Parse
             else if (tok.getType() == TokenType.FALSE)
                 return BoolLit.getFalse();
             else if (tok.getType() == TokenType.QUOTE)
-                return new Cons(new Ident("'"), new Cons(parseExp(), null));
+                return new Cons(new Ident("'"), parseExp());
             else if (tok.getType() == TokenType.IDENT)
                 return new Ident(tok.getName());
             else if (tok.getType() == TokenType.LPAREN)
@@ -80,6 +80,8 @@ namespace Parse
                 st.Push(parseExp(next));
                 next = scanner.getNextToken();
             }
+            if (st.Count == 0)
+                return Nil.getNil();
             st.Push(Nil.getNil());
             while(true)
             {
