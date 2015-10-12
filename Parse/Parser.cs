@@ -79,10 +79,16 @@ namespace Parse
                 st.Push(parseExp(next));
                 next = scanner.getNextToken();
             }
-            if (st.Count == 0)
-                return Nil.getNil();
-            st.Push(Nil.getNil());
-            Node retval;
+            if (next.getType() == TokenType.DOT)
+            {
+                st.Push(parseExp());
+            }
+            else
+            {
+                if (st.Count == 0)
+                    return Nil.getNil();
+                st.Push(Nil.getNil());
+            }
             while(true)
             {
                 Node cdr = st.Pop();
@@ -90,15 +96,9 @@ namespace Parse
                 st.Push(new Cons(car, cdr));
                 if (st.Count == 1)
                 {
-                    retval = st.Pop();
-                    break;
-                }
+                    return st.Pop();
             }
-            if (next.getType() == TokenType.DOT)
-            {
-                retval.setCdr(parseExp());
             }
-            return retval;
         }
 
         // TODO: Add any additional methods you might need.
